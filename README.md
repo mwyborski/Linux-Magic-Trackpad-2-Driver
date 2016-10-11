@@ -69,8 +69,11 @@ drivers/hid/hid-apple.c
 drivers/hid/hid-core.c
 ```
 Replace the bcm5974-driver source with the modified one 
-`drivers/input/mouse/bcm5974.c`
+```
+drivers/input/mouse/bcm5974.c
+```
 with
+
 https://raw.githubusercontent.com/robotrovsky/linux/master/drivers/input/mouse/bcm5974.c
 
 Then:
@@ -86,10 +89,12 @@ Make a backup of your original `drivers` folder and just copy the folder `/lib/m
 After a reboot your Magic Trackpad 2 should work. You can check, that it now uses the bcm5974 driver with `usb-devices`
 
 Now you should install the mtrack driver
-`xf86-input-mtrack`
+```
+xf86-input-mtrack
+```
 is the package-name in yaourt.
 
-Then adjust your configuration like explained here:
+Adjust your configuration-file like explained here:
 https://github.com/BlueDragonX/xf86-input-mtrack/blob/master/README.md
 
 
