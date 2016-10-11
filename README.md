@@ -1,3 +1,5 @@
+This driver is still not stable.
+
 # Linux-Magic-Trackpad-2-Driver
 
 The driver for the Apple Magic Trackpad 2 can be found in my cloned linux repo:
