@@ -43,9 +43,11 @@ Edit
 
 > PKGBUILD
 
- and look for the pkgbase parameter. Change this to your custom package name, e.g.:
+ and look for the pkgbase parameter. Change this to "linux-custom":
 
 ` pkgbase=linux-custom`
+
+This is important otherwise you will later on overwrite your running kernel!!
 
 Then:
 ```
@@ -66,13 +68,15 @@ drivers/hid/hid-ids.h
 drivers/hid/hid-apple.c
 drivers/hid/hid-core.c
 ```
-Replace the bcm5974-driver source with the modified one
+Replace the bcm5974-driver source with the modified one 
 `drivers/input/mouse/bcm5974.c`
+with
+https://raw.githubusercontent.com/robotrovsky/linux/master/drivers/input/mouse/bcm5974.c
 
 Then:
 ```
 $ make modules -j{number of cores}
-$ make modules_install
+$ sudo make modules_install
 ```
 
 Now you have recompiled all kernel modules and installed them to` /lib/modules/{kernel-version}-custom/`
@@ -90,7 +94,9 @@ https://github.com/BlueDragonX/xf86-input-mtrack/blob/master/README.md
 
 
 My 
-```/etc/X11/xorg.conf.d/10-mtrack.conf ``` 
+```
+/etc/X11/xorg.conf.d/10-mtrack.conf
+``` 
 is still not perfect, but you can use it as a starting point. It supports horizontal scrolling in the natural direction, but i havent configured yet the 3 finger drag.
 
 ```
