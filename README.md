@@ -26,7 +26,7 @@ https://github.com/BlueDragonX/xf86-input-mtrack
 
 Right now the driver only works over USB. 
 
-Installation on Arch Linux:
+#Installation on Arch Linux:
 You have to compile the kernel modules. 
 See https://wiki.archlinux.org/index.php/Kernels/Arch_Build_System. The clean way would be to create a patch from the changes in
 https://github.com/robotrovsky/linux/commit/7b50169c3a8948e67a67eb530b91117a7f5d9d5b and add that patch to the prepare routine. A quick unclean way would be as follows:
@@ -86,7 +86,7 @@ Now you should install the mtrack driver
 is the package-name in yaourt.
 
 Then adjust your configuration like explained here:
-https://github.com/BlueDragonX/xf86-input-mtrack
+https://github.com/BlueDragonX/xf86-input-mtrack/blob/master/README.md
 
 
 
