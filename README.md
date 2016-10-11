@@ -89,5 +89,37 @@ Then adjust your configuration like explained here:
 https://github.com/BlueDragonX/xf86-input-mtrack/blob/master/README.md
 
 
+My 
+```/etc/X11/xorg.conf.d/10-mtrack.conf ``` 
+is still not perfect, but you can use it as a starting point. It supports horizontal scrolling in the natural direction, but i havent configured yet the 3 finger drag.
 
+```
+Section "InputClass"
+    MatchIsTouchpad "on"
+    Identifier "Touchpads"
+    Driver "mtrack"
+    Option          "Sensitivity" "0.64"
+    Option          "FingerHigh" "5"
+    Option          "FingerLow" "1"
+    Option          "IgnoreThumb" "true"
+    Option          "IgnorePalm" "true"
+    Option          "DisableOnPalm" "true"
+    Option          "TapButton1" "1"
+    Option          "TapButton2" "3"
+    Option          "TapButton3" "2"
+    Option          "TapButton4" "0"
+    Option          "ClickFinger1" "1"
+    Option          "ClickFinger2" "2"
+    Option          "ClickFinger3" "3"
+    Option          "ButtonMoveEmulate" "false"
+    Option          "ButtonIntegrated" "true"
+    Option          "ClickTime" "25"
+    Option          "BottomEdge" "30"
+    Option          "ScrollDistance" "75"
+    Option          "VertScrollDelta" "-111"
+    Option          "HorizScrollDelta" "-111"
+    Option          "ScrollLeftButton" "7"
+    Option          "ScrollRightButton" "6"
 
+EndSection
+```
