@@ -1,4 +1,4 @@
-This driver is still not stable.
+robbi5 created a dkms package with the driver that is known to work with kernel 4.4.0-57-generic on Ubuntu 16.04 LTS: https://github.com/robbi5/magictrackpad2-dkms
 
 # Linux-Magic-Trackpad-2-Driver
 
