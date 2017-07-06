@@ -7,7 +7,7 @@ https://github.com/robotrovsky/linux
 
 USB Device ID is registered in:
 ```
-drivers/hid/hid-ids.txt
+drivers/hid/hid-ids.h
 drivers/hid/hid-apple.c
 drivers/hid/hid-core.c
 ```
