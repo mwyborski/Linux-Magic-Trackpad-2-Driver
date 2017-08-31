@@ -29,3 +29,6 @@ https://github.com/BlueDragonX/xf86-input-mtrack
 Right now the driver only works over USB. I submitted an official patch to linux-input:
 http://www.spinics.net/lists/kernel/msg2551703.html
 
+You might want to have a look at the discussion:
+https://github.com/torvalds/linux/pull/332#issuecomment-298339763
+
