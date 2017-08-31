@@ -26,5 +26,6 @@ Future modifications will only affect bcm5974.c.
 I used this driver in combination with the mtrack-driver, to make use of the multitouch feature (e.g. 2-finger-tap for right-click, etc):
 https://github.com/BlueDragonX/xf86-input-mtrack
 
-Right now the driver only works over USB. 
+Right now the driver only works over USB. I submitted an official patch to linux-input:
+http://www.spinics.net/lists/kernel/msg2551703.html
 
