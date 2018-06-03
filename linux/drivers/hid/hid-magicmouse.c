@@ -216,6 +216,7 @@ static void magicmouse_emit_touch(struct magicmouse_sc *msc, int raw_id,
 		orientation = (tdata[7] >> 2) - 32;
 		touch_major = tdata[4];
 		touch_minor = tdata[5];
+		state = tdata[7] & TOUCH_STATE_MASK;
 		if (npoints == 1)
 			down = (size > 0) && (tdata[7] > 0);//
 		else
@@ -550,8 +551,8 @@ static int magicmouse_input_configured(struct hid_device *hdev,
 static int magicmouse_probe(struct hid_device *hdev,
 	const struct hid_device_id *id)
 {
-	const u8 feature_bt_multitouch[] = { 0xF1, 0x02, 0x01 };
-	const u8 feature_bt_no_touches_report[] = { 0xF1, 0xC8, 0x09 };
+	u8 feature_bt_multitouch[] = { 0xF1, 0x02, 0x01 };
+	u8 feature_bt_no_touches_report[] = { 0xF1, 0xC8, 0x09 };
 	u8 feature[] = { 0xd7, 0x01 };
 	u8 *buf;
 	struct magicmouse_sc *msc;
