@@ -218,9 +218,9 @@ static void magicmouse_emit_touch(struct magicmouse_sc *msc, int raw_id,
 		touch_minor = tdata[5];
 		state = tdata[7] & TOUCH_STATE_MASK;
 		if (npoints == 1)
-			down = (size > 0) && (tdata[7] > 0);//
+			down = (size > 0) && (tdata[7] > 0);
 		else
-			down = true;//state != TOUCH_STATE_NONE;
+			down = true;
 	}
 
 	/* Store tracking ID and other fields. */
