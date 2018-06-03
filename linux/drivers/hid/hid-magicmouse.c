@@ -404,6 +404,8 @@ static int magicmouse_raw_event(struct hid_device *hdev,
 
 static int magicmouse_setup_input(struct input_dev *input, struct hid_device *hdev)
 {
+	u8 feature_bt_multitouch[] = { 0xF1, 0x02, 0x01 };
+	u8 feature_bt_no_touches_report[] = { 0xF1, 0xC8, 0x09 };
 	int error;
 	int mt_flags = 0;
 
@@ -448,6 +450,16 @@ static int magicmouse_setup_input(struct input_dev *input, struct hid_device *hd
 		__set_bit(BTN_TOOL_FINGER, input->keybit);
 
 		mt_flags = INPUT_MT_POINTER | INPUT_MT_DROP_UNUSED | INPUT_MT_TRACK;
+
+		if (input->id.vendor == BT_VENDOR_ID_APPLE)  {
+			hid_hw_raw_request(hdev, feature_bt_multitouch[0],
+					feature_bt_multitouch, sizeof(feature_bt_multitouch),
+					HID_FEATURE_REPORT, HID_REQ_SET_REPORT);
+			hid_hw_raw_request(hdev, feature_bt_no_touches_report[0],
+					feature_bt_no_touches_report,
+					sizeof(feature_bt_no_touches_report), HID_FEATURE_REPORT,
+					HID_REQ_SET_REPORT);
+		}
 	}
 
 
@@ -551,8 +563,6 @@ static int magicmouse_input_configured(struct hid_device *hdev,
 static int magicmouse_probe(struct hid_device *hdev,
 	const struct hid_device_id *id)
 {
-	u8 feature_bt_multitouch[] = { 0xF1, 0x02, 0x01 };
-	u8 feature_bt_no_touches_report[] = { 0xF1, 0xC8, 0x09 };
 	u8 feature[] = { 0xd7, 0x01 };
 	u8 *buf;
 	struct magicmouse_sc *msc;
@@ -636,13 +646,6 @@ static int magicmouse_probe(struct hid_device *hdev,
 			hid_err(hdev, "unable to request touch data (%d)\n", ret);
 			goto err_stop_hw;
 		}
-	} else {
-		hid_hw_raw_request(hdev, feature_bt_multitouch[0],
-				feature_bt_multitouch, sizeof(feature_bt_multitouch),
-				HID_FEATURE_REPORT,	HID_REQ_SET_REPORT);
-		hid_hw_raw_request(hdev, feature_bt_no_touches_report[0],
-				feature_bt_no_touches_report, sizeof(feature_bt_no_touches_report),
-				HID_FEATURE_REPORT,	HID_REQ_SET_REPORT);
 	}
 
 	return 0;
