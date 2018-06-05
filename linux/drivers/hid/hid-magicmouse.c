@@ -92,6 +92,18 @@ MODULE_PARM_DESC(report_undeciphered, "Report undeciphered multi-touch state fie
 #define TRACKPAD_MAX_Y 2565
 #define TRACKPAD_RES_Y \
 	((TRACKPAD_MAX_Y - TRACKPAD_MIN_Y) / (TRACKPAD_DIMENSION_Y / 100))
+
+#define TRACKPAD2_DIMENSION_X (float)16000
+#define TRACKPAD2_MIN_X -4781
+#define TRACKPAD2_MAX_X 5114
+#define TRACKPAD2_RES_X \
+	((TRACKPAD2_MAX_X - TRACKPAD2_MIN_X) / (TRACKPAD2_DIMENSION_X / 100))
+#define TRACKPAD2_DIMENSION_Y (float)11500
+#define TRACKPAD2_MIN_Y -3223
+#define TRACKPAD2_MAX_Y 3362
+#define TRACKPAD2_RES_Y \
+	((TRACKPAD2_MAX_Y - TRACKPAD2_MIN_Y) / (TRACKPAD2_DIMENSION_Y / 100))
+
 #define MAX_TOUCHES		16
 
 /**
@@ -507,11 +519,21 @@ static int magicmouse_setup_input(struct input_dev *input, struct hid_device *hd
 		input_abs_set_res(input, ABS_MT_POSITION_Y,
 				  TRACKPAD_RES_Y);
 	} else { /* USB_DEVICE_ID_APPLE_MAGICTRACKPAD2 */
+		input_set_abs_params(input, ABS_X, TRACKPAD2_MIN_X,
+				     TRACKPAD2_MAX_X, 4, 0);
+		input_set_abs_params(input, ABS_Y, TRACKPAD2_MIN_Y,
+				     TRACKPAD2_MAX_Y, 4, 0);
+		input_set_abs_params(input, ABS_MT_POSITION_X,
+				     TRACKPAD2_MIN_X, TRACKPAD2_MAX_X, 4, 0);
+		input_set_abs_params(input, ABS_MT_POSITION_Y,
+				     TRACKPAD2_MIN_Y, TRACKPAD2_MAX_Y, 4, 0);
 
-		input_set_abs_params(input, ABS_PRESSURE, 0, 256, 5, 0);
-		input_set_abs_params(input, ABS_TOOL_WIDTH, 0, 16, 0, 0);
-		input_set_abs_params(input, ABS_MT_POSITION_X, -3678, 3934,0,0);
-		input_set_abs_params(input, ABS_MT_POSITION_Y, -2479, 2586,0,0);
+		input_abs_set_res(input, ABS_X, TRACKPAD2_RES_X);
+		input_abs_set_res(input, ABS_Y, TRACKPAD2_RES_Y);
+		input_abs_set_res(input, ABS_MT_POSITION_X,
+				  TRACKPAD2_RES_X);
+		input_abs_set_res(input, ABS_MT_POSITION_Y,
+				  TRACKPAD2_RES_Y);
 	}
 
 	input_set_events_per_packet(input, 60);
