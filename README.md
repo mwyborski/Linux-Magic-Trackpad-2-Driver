@@ -15,3 +15,15 @@ Please help to test this driver and report issues.
 TODO:
 - test with xf86-libinput
 - test with xf86-synaptics
+
+## DKMS
+
+Setup/install with:
+
+    sudo sh ./scripts/install.sh
+
+Remove with:
+
+    sudo sh ./scripts/remove.sh
+
+Or just use regular `dkms` commands once you've added `./linux/drivers/hid`.
