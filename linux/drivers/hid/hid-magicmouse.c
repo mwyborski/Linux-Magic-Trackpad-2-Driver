@@ -101,6 +101,7 @@ MODULE_PARM_DESC(report_undeciphered, "Report undeciphered multi-touch state fie
 #define TRACKPAD2_RES_Y 35
 
 #define MAX_TOUCHES		16
+#define MAX_TOUCH_ORIENTATION	16384
 
 /**
  * struct magicmouse_sc - Tracks Magic Mouse-specific data.
@@ -195,6 +196,7 @@ static void magicmouse_emit_touch(struct magicmouse_sc *msc, int raw_id,
 {
 	struct input_dev *input = msc->input;
 	int id, x, y, size, orientation, touch_major, touch_minor, state, down;
+	int pressure = 0;
 
 	if (input->id.product == USB_DEVICE_ID_APPLE_MAGICMOUSE) {
 		id = (tdata[6] << 2 | tdata[5] >> 6) & 0xf;
@@ -221,14 +223,19 @@ static void magicmouse_emit_touch(struct magicmouse_sc *msc, int raw_id,
 		x = (tdata[1] << 27 | tdata[0] << 19) >> 19;
 		y = -((tdata[3] << 30 | tdata[2] << 22 | tdata[1] << 14) >> 19);
 		size = tdata[6] & 0x3f;
-		orientation = (tdata[7] >> 2) - 32;
+		orientation = (MAX_TOUCH_ORIENTATION - ((tdata[8] & 0xf0) << 6));
 		touch_major = tdata[4];
 		touch_minor = tdata[5];
 		state = tdata[7] & TOUCH_STATE_MASK;
+		pressure = tdata[7];
 		if (npoints == 1)
-			down = (size > 0) && (tdata[7] > 0);
+			down = (size > 0) && (pressure > 0);
 		else
+		{
 			down = true;
+			pressure+=4;
+			size+=4;
+		}
 	}
 
 	/* Store tracking ID and other fields. */
@@ -294,6 +301,11 @@ static void magicmouse_emit_touch(struct magicmouse_sc *msc, int raw_id,
 		input_report_abs(input, ABS_MT_ORIENTATION, -orientation);
 		input_report_abs(input, ABS_MT_POSITION_X, x);
 		input_report_abs(input, ABS_MT_POSITION_Y, y);
+
+		if (input->id.product == USB_DEVICE_ID_APPLE_MAGICTRACKPAD2) {
+			input_report_abs(input, ABS_TOOL_WIDTH, size << 1);
+			input_report_abs(input, ABS_PRESSURE, pressure << 1);
+		}
 
 		if (report_undeciphered) {
 			if (input->id.product == USB_DEVICE_ID_APPLE_MAGICMOUSE)
@@ -515,7 +527,8 @@ static int magicmouse_setup_input(struct input_dev *input, struct hid_device *hd
 		input_abs_set_res(input, ABS_MT_POSITION_Y,
 				  TRACKPAD_RES_Y);
 	} else { /* USB_DEVICE_ID_APPLE_MAGICTRACKPAD2 */
-		input_set_abs_params(input, ABS_TOOL_WIDTH, 0, 16, 0, 0);
+		input_set_abs_params(input, ABS_PRESSURE, 0, 512, 0, 0);
+		input_set_abs_params(input, ABS_TOOL_WIDTH, 0, 128, 0, 0);
 		input_set_abs_params(input, ABS_MT_POSITION_X,
 				     TRACKPAD2_MIN_X, TRACKPAD2_MAX_X, 4, 0);
 		input_set_abs_params(input, ABS_MT_POSITION_Y,
