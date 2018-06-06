@@ -231,11 +231,7 @@ static void magicmouse_emit_touch(struct magicmouse_sc *msc, int raw_id,
 		if (npoints == 1)
 			down = (size > 0) && (pressure > 0);
 		else
-		{
 			down = true;
-			pressure+=4;
-			size+=4;
-		}
 	}
 
 	/* Store tracking ID and other fields. */
@@ -341,11 +337,8 @@ static int magicmouse_raw_event(struct hid_device *hdev,
 
 		clicks = data[1];
 
-		/* The following bits provide a device specific timestamp. They
-		 * are unused here.
-		 *
-		 * ts = data[1] >> 6 | data[2] << 2 | data[3] << 10;
-		 */
+		input_mt_sync_frame(input);
+
 		break;
 	case TRACKPAD2_USB_REPORT_ID:
 		/* Expect twelve bytes of prefix, and N*9 bytes of touch data. */
@@ -363,11 +356,7 @@ static int magicmouse_raw_event(struct hid_device *hdev,
 
 		clicks = data[1];
 
-		/* The following bits provide a device specific timestamp. They
-		 * are unused here.
-		 *
-		 * ts = data[1] >> 6 | data[2] << 2 | data[3] << 10;
-		 */
+		input_mt_sync_frame(input);
 		break;
 	case MOUSE_REPORT_ID:
 		/* Expect six bytes of prefix, and N*8 bytes of touch data. */
