@@ -406,8 +406,7 @@ static int magicmouse_raw_event(struct hid_device *hdev,
 		input_report_key(input, BTN_MOUSE, clicks & 1);
 		input_mt_report_pointer_emulation(input, true);
 	}
-	else /* USB_DEVICE_ID_APPLE_MAGICTRACKPAD2 */
-	{
+	else /* USB_DEVICE_ID_APPLE_MAGICTRACKPAD2 */ {
 		input_mt_sync_frame(input);
 		input_report_key(input, BTN_MOUSE, clicks & 1);
 	}
