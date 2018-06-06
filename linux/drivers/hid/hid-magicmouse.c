@@ -230,8 +230,13 @@ static void magicmouse_emit_touch(struct magicmouse_sc *msc, int raw_id,
 		pressure = tdata[7];
 		if (npoints == 1)
 			down = (size > 0) && (pressure > 0);
-		else
+		else {
 			down = true;
+
+			/* Make sure that multi touch gestures are handled by libinput. */
+			pressure += 4;
+			size += 4;
+		}
 	}
 
 	/* Store tracking ID and other fields. */
@@ -336,9 +341,6 @@ static int magicmouse_raw_event(struct hid_device *hdev,
 			magicmouse_emit_touch(msc, ii, data + ii * 9 + 4, npoints);
 
 		clicks = data[1];
-
-		input_mt_sync_frame(input);
-
 		break;
 	case TRACKPAD2_USB_REPORT_ID:
 		/* Expect twelve bytes of prefix, and N*9 bytes of touch data. */
@@ -355,8 +357,6 @@ static int magicmouse_raw_event(struct hid_device *hdev,
 			magicmouse_emit_touch(msc, ii, data + ii * 9 + 12, npoints);
 
 		clicks = data[1];
-
-		input_mt_sync_frame(input);
 		break;
 	case MOUSE_REPORT_ID:
 		/* Expect six bytes of prefix, and N*8 bytes of touch data. */
@@ -402,9 +402,14 @@ static int magicmouse_raw_event(struct hid_device *hdev,
 		magicmouse_emit_buttons(msc, clicks & 3);
 		input_report_rel(input, REL_X, x);
 		input_report_rel(input, REL_Y, y);
-	} else { /* USB_DEVICE_ID_APPLE_MAGICTRACKPAD */
+	} else if (input->id.product == USB_DEVICE_ID_APPLE_MAGICTRACKPAD) {
 		input_report_key(input, BTN_MOUSE, clicks & 1);
 		input_mt_report_pointer_emulation(input, true);
+	}
+	else /* USB_DEVICE_ID_APPLE_MAGICTRACKPAD2 */
+	{
+		input_mt_sync_frame(input);
+		input_report_key(input, BTN_MOUSE, clicks & 1);
 	}
 
 	input_sync(input);
