@@ -8,10 +8,10 @@ The driver supports bluetooth and USB. To connect the Trackpad via bluetooth, it
 
 Please help to test this driver and report issues. 
 
-# libinput
+## libinput
 You can just use the standard xf86-libinput driver and configure it through your Window-Manager-Settings. This driver works very well, but does not support three-finger-drag, but tap-to-drag.
 
-# mTrack
+## mTrack
 An example configuration for mtrack can be found in:
 ```
 usr/share/X11/xorg.conf.d/90-magictrackpad.conf 
@@ -33,4 +33,14 @@ Remove with:
 
 Or just use regular `dkms` commands once you've added `./linux/drivers/hid`.
 
+## Troubleshooting
+If the driver is not working, please make sure that the correct hid-magicmouse driver gets loaded and try the following steps:
+
+    cd linux/drivers/hid
+    make
+    sudo rmmod hid_magicmouse
+    sudo insmod ./hid-magicmouse.ko
+    tail -f ~/.local/share/xorg/Xorg.0.log
+
+Now unplug the trackpad and plug it back in, to see which driver gets loaded.
 
