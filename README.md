@@ -25,11 +25,11 @@ This configuration supports tap-to-click, two-finger-scroll and three-finger-dra
 Setup/install with:
 
     cd scripts
-    sudo sh ./install.sh
+    sudo ./install.sh
 
 Remove with:
 
-    sudo sh ./remove.sh
+    sudo ./remove.sh
 
 Or just use regular `dkms` commands once you've added `./linux/drivers/hid`.
 
