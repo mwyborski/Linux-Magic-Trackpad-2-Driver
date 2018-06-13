@@ -45,5 +45,5 @@ If the driver is not working, please make sure that the correct hid-magicmouse d
 Now unplug the trackpad and plug it back in, to see which driver gets loaded.
 
 ## Thanks
-https://github.com/ponyfleisch/hid-magictrackpad2
-https://github.com/adam-h/Linux-Magic-Trackpad-2-Driver
+* https://github.com/ponyfleisch/hid-magictrackpad2
+* https://github.com/adam-h/Linux-Magic-Trackpad-2-Driver
