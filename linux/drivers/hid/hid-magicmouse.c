@@ -19,6 +19,7 @@
 #include <linux/input/mt.h>
 #include <linux/module.h>
 #include <linux/slab.h>
+#include <linux/usb/input.h>
 
 #include "hid-ids.h"
 
@@ -593,6 +594,14 @@ static int magicmouse_probe(struct hid_device *hdev,
 	struct hid_report *report;
 	int ret;
 	int feature_size;
+	struct usb_interface *intf;
+
+	if (id->vendor == USB_VENDOR_ID_APPLE &&
+	    id->product == USB_DEVICE_ID_APPLE_MAGICTRACKPAD2) {
+		intf = to_usb_interface(hdev->dev.parent);
+		if (intf->cur_altsetting->desc.bInterfaceNumber != 1)
+			return 0;
+	}
 
 	msc = devm_kzalloc(&hdev->dev, sizeof(*msc), GFP_KERNEL);
 	if (msc == NULL) {
