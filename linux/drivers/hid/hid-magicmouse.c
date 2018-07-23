@@ -659,18 +659,25 @@ static int magicmouse_probe(struct hid_device *hdev,
 	if (id->product == USB_DEVICE_ID_APPLE_MAGICMOUSE ||
 	    id->product == USB_DEVICE_ID_APPLE_MAGICTRACKPAD) {
 		feature_size = sizeof(feature_mt);
-		feature = feature_mt;
+		feature = kmemdup(feature_mt, feature_size, GFP_KERNEL);
 	} else { /* USB_DEVICE_ID_APPLE_MAGICTRACKPAD2 */
 		if (id->vendor == BT_VENDOR_ID_APPLE) {
 			feature_size = sizeof(feature_mt_trackpad2_bt);
-			feature = feature_mt_trackpad2_bt;
+			feature = kmemdup(feature_mt_trackpad2_bt, feature_size,
+					  GFP_KERNEL);
 		} else { /* USB_VENDOR_ID_APPLE */
 			feature_size = sizeof(feature_mt_trackpad2_usb);
-			feature = feature_mt_trackpad2_usb;
+			feature = kmemdup(feature_mt_trackpad2_usb, feature_size,
+					  GFP_KERNEL);
 		}
+	}
+	if (!feature) {
+		ret = -ENOMEM;
+		goto err_stop_hw;
 	}
 	ret = hid_hw_raw_request(hdev, feature[0], feature, feature_size,
 				 HID_FEATURE_REPORT, HID_REQ_SET_REPORT);
+	kfree(feature);
 	if (ret != -EIO && ret != feature_size) {
 		hid_err(hdev, "unable to request touch data (%d)\n", ret);
 		goto err_stop_hw;
