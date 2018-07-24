@@ -1,6 +1,6 @@
 # Linux-Magic-Trackpad-2-Driver
 
-This repository contains the linux hid-magicmouse driver with Magic Trackpad 2 support for Linux 4.17-rc7. For older kernels you might have to diff and backport.
+This repository contains the linux hid-magicmouse driver with Magic Trackpad 2 support for Linux 4.18. For older kernels you might have to diff and backport.
 
 The driver is tested in combination with the xf86-libinput and xf86-mtrack driver. 
 
@@ -47,3 +47,4 @@ Now unplug the trackpad and plug it back in, to see which driver gets loaded.
 ## Thanks
 * https://github.com/ponyfleisch/hid-magictrackpad2
 * https://github.com/adam-h/Linux-Magic-Trackpad-2-Driver
+* https://github.com/bobbysue/Linux-Magic-Trackpad-2-Driver
