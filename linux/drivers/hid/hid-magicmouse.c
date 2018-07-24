@@ -634,19 +634,19 @@ static int magicmouse_probe(struct hid_device *hdev,
 
 	if (id->product == USB_DEVICE_ID_APPLE_MAGICMOUSE)
 		report = hid_register_report(hdev, HID_INPUT_REPORT,
-			MOUSE_REPORT_ID);
+			MOUSE_REPORT_ID, 0);
 	else if (id->product == USB_DEVICE_ID_APPLE_MAGICTRACKPAD) {
 		report = hid_register_report(hdev, HID_INPUT_REPORT,
-			TRACKPAD_REPORT_ID);
+			TRACKPAD_REPORT_ID, 0);
 		report = hid_register_report(hdev, HID_INPUT_REPORT,
-			DOUBLE_REPORT_ID);
+			DOUBLE_REPORT_ID, 0);
 	} else { /* USB_DEVICE_ID_APPLE_MAGICTRACKPAD2 */
 		if (id->vendor == BT_VENDOR_ID_APPLE)
 			report = hid_register_report(hdev, HID_INPUT_REPORT,
-				TRACKPAD2_BT_REPORT_ID);
+				TRACKPAD2_BT_REPORT_ID, 0);
 		else /* USB_VENDOR_ID_APPLE */
 			report = hid_register_report(hdev, HID_INPUT_REPORT,
-				TRACKPAD2_USB_REPORT_ID);
+				TRACKPAD2_USB_REPORT_ID, 0);
 	}
 
 	if (!report) {
