@@ -4,7 +4,7 @@ set -e
 set -x
 
 dkms_name="hid-magicmouse-dkms"
-dkms_version="4.17+magictrackpad2"
+dkms_version="4.18+magictrackpad2"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # add
