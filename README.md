@@ -1,3 +1,21 @@
+# Update 2018-10-02
+
+The patch has been modified and send in by Sean O'Brien and was merged into Jiri Kosina's for-next branch:
+
+https://git.kernel.org/pub/scm/linux/kernel/git/jikos/hid.git/commit/?h=for-next&id=9d7b18668956c411a422d04c712994c5fdb23a4b
+
+This means that the active development in this repository is stopped and you should use the official code for modifications.
+
+
+
+## Thanks
+* Thank you to everybody who helped, whether through testing or active development!
+* https://github.com/bobbysue/Linux-Magic-Trackpad-2-Driver
+* https://github.com/ponyfleisch/hid-magictrackpad2
+* https://github.com/adam-h/Linux-Magic-Trackpad-2-Driver
+
+
+
 # Linux-Magic-Trackpad-2-Driver
 
 This repository contains the linux hid-magicmouse driver with Magic Trackpad 2 support for Linux 4.18. For older kernels you might have to diff and backport.
@@ -44,7 +62,4 @@ If the driver is not working, please make sure that the correct hid-magicmouse d
 
 Now unplug the trackpad and plug it back in, to see which driver gets loaded.
 
-## Thanks
-* https://github.com/ponyfleisch/hid-magictrackpad2
-* https://github.com/adam-h/Linux-Magic-Trackpad-2-Driver
-* https://github.com/bobbysue/Linux-Magic-Trackpad-2-Driver
+
