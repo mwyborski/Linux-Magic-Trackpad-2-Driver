@@ -1,8 +1,6 @@
-# Update 2018-10-02
+# Update 2018-12-15
 
-The patch has been modified and send in by Sean O'Brien and was merged into Jiri Kosina's for-next branch:
-
-https://git.kernel.org/pub/scm/linux/kernel/git/jikos/hid.git/commit/?h=for-next&id=9d7b18668956c411a422d04c712994c5fdb23a4b
+The driver will be included in the 4.20 release of the official linux kernel.
 
 This means that the active development in this repository is stopped and you should use the official code for modifications.
 
