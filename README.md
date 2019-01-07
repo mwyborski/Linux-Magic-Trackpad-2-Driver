@@ -1,3 +1,16 @@
+# Update 2019-01-07
+
+As the pressure offsets have been removed from the official release, the driver needs a libinput quirks file. schmunk42 suggested the following quirks file in his comment https://github.com/torvalds/linux/pull/332#issuecomment-451859484:
+
+```/etc/libinput/local-overrides.quirks```
+
+    [Touchpad touch override]
+    MatchUdevType=touchpad
+    MatchName=*Magic Trackpad 2
+    AttrPressureRange=6:2
+
+
+
 # Update 2018-12-15
 
 The driver will be included in the 4.20 release of the official linux kernel.
