@@ -70,6 +70,9 @@ If the driver is not working, please make sure that the correct hid-magicmouse d
     sudo rmmod hid_magicmouse
     sudo insmod ./hid-magicmouse.ko
     tail -f ~/.local/share/xorg/Xorg.0.log
+or for Ubuntu
+
+    tail -f /var/log/Xorg.0.log
 
 Now unplug the trackpad and plug it back in, to see which driver gets loaded.
 
