@@ -7,7 +7,7 @@ As the pressure offsets have been removed from the official release, the driver 
     [Touchpad touch override]
     MatchUdevType=touchpad
     MatchName=*Magic Trackpad 2
-    AttrPressureRange=6:2
+    AttrPressureRange=4:0
 
 
 
