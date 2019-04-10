@@ -1,3 +1,6 @@
+# Update 2019-04-10
+Tried today the beta of Ubuntu 19.04 with Kernel 5.0 and the Magic Trackpad 2 works out of the box. No quirks needed.
+
 # Update 2019-01-07
 
 As the pressure offsets have been removed from the official release, the driver needs a libinput quirks file. schmunk42 suggested the following quirks file in his comment https://github.com/torvalds/linux/pull/332#issuecomment-451859484:
