@@ -1,3 +1,21 @@
+# Update 2019-04-19
+Installed today Xubuntu 19.04 and the pressure problem was back. I had to add the following file:
+
+```/usr/share/X11/xorg.conf.d/90-magictrackpad.conf```
+
+```
+Section "InputClass"
+  Identifier      "Touchpads"
+  Driver          "libinput"
+  MatchProduct    "Apple Inc. Magic Trackpad 2"
+  MatchDevicePath "/dev/input/event*"
+EndSection
+```
+
+To pair via Bluetooth disconnect from USB, then turn it off and on again and you will find it when you search for devices.
+
+
+
 # Update 2019-04-10
 Tried today the beta of Ubuntu 19.04 with Kernel 5.0 and the Magic Trackpad 2 works out of the box. No quirks needed.
 
