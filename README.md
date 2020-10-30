@@ -1,4 +1,7 @@
-# Update 2019-04-19
+# Look elsewhere
+This driver was merged into the official Linux kernel in 4.20 ([see update 2018-12-15 below](#update-2018-12-15)). If `uname -srm` shows 4.20 or greater, you already have this driver installed and likely have no use for the driver in this repo.
+
+## Update 2019-04-19
 Installed today Xubuntu 19.04 and the pressure problem was back. I had to add the following file:
 
 ```/usr/share/X11/xorg.conf.d/90-magictrackpad.conf```
@@ -16,10 +19,10 @@ To pair via Bluetooth disconnect from USB, then turn it off and on again and you
 
 
 
-# Update 2019-04-10
+## Update 2019-04-10
 Tried today the beta of Ubuntu 19.04 with Kernel 5.0 and the Magic Trackpad 2 works out of the box. No quirks needed.
 
-# Update 2019-01-07
+## Update 2019-01-07
 
 As the pressure offsets have been removed from the official release, the driver needs a libinput quirks file. schmunk42 suggested the following quirks file in his comment https://github.com/torvalds/linux/pull/332#issuecomment-451859484:
 
@@ -32,7 +35,7 @@ As the pressure offsets have been removed from the official release, the driver 
 
 
 
-# Update 2018-12-15
+## Update 2018-12-15
 
 The driver will be included in the 4.20 release of the official linux kernel.
 
@@ -40,7 +43,7 @@ This means that the active development in this repository is stopped and you sho
 
 
 
-## Thanks
+### Thanks
 * Thank you to everybody who helped, whether through testing or active development!
 * https://github.com/bobbysue/Linux-Magic-Trackpad-2-Driver
 * https://github.com/ponyfleisch/hid-magictrackpad2
