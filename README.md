@@ -1,4 +1,4 @@
-# Look elsewhere
+# Driver is mainlined
 This driver was merged into the official Linux kernel in 4.20 ([see update 2018-12-15 below](#update-2018-12-15)). If `uname -srm` shows 4.20 or greater, you already have this driver installed and likely have no use for the driver in this repo.
 
 ## Update 2019-04-19
